@@ -2,12 +2,13 @@ package api.shop.online.onlineshopapi.model;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @Column(name = "login")
@@ -22,18 +23,30 @@ public class User {
     @Column(name = "balance")
     private Long balance;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private Role role = Role.USER;
+    private String role = Role.USER.name();
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private Status status = Status.ACTIVE;
+    private String status = Status.ACTIVE.name();
+
+    @OneToMany(mappedBy = "user")
+//    @JoinColumn(name = "purchase_id")
+    private Set<Purchase> purchases;
+
+//    @OneToMany(mappedBy = "user")
+//    @JoinColumn(name = "review_id")
+//    private Set<Review> reviews;
+
+    @OneToOne(mappedBy = "user")
+    private Organization organization;
 
     public User() {
     }
 
-    public User(String login, String email, String password, Long balance, Role role, Status status) {
+    public User(String login, String email, String password, Long balance, String role,
+                String status) {
         this.login = login;
         this.email = email;
         this.password = password;
@@ -82,19 +95,43 @@ public class User {
         this.balance = balance;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Set<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(Set<Purchase> purchases) {
+        this.purchases = purchases;
+    }
+
+//    public Set<Review> getReviews() {
+//        return reviews;
+//    }
+
+//    public void setReviews(Set<Review> reviews) {
+//        this.reviews = reviews;
+//    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 }
