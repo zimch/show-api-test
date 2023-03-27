@@ -2,6 +2,7 @@ package api.shop.online.onlineshopapi.rest;
 
 import api.shop.online.onlineshopapi.model.Organization;
 import api.shop.online.onlineshopapi.model.User;
+import api.shop.online.onlineshopapi.repository.OrganizationRepository;
 import api.shop.online.onlineshopapi.repository.UserRepository;
 import api.shop.online.onlineshopapi.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,13 +22,31 @@ public class UserRestController {
     UserService userService;
 
     @Autowired
+    OrganizationRepository organizationRepository;
+
+    @Autowired
     UserRepository userRepository;
 
     @GetMapping(value = "/organizations", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Organization> getOrganization(HttpServletRequest httpServletRequest) {
-        Principal userPrincipal = httpServletRequest.getUserPrincipal();
-        User user = userRepository.findByUsername(userPrincipal.getName());
+    public ResponseEntity<Organization> getOrganization(Principal principal) {
+        User user = userRepository.findByUsername(principal.getName());
         return new ResponseEntity<>(user.getOrganization(), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/organizations/save", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Organization> saveUser(@RequestBody Organization organization,
+                                                 Principal principal) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+
+        if (organization == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        organization.setUser(userRepository.findByUsername(principal.getName()));
+
+        this.organizationRepository.save(organization);
+
+        return new ResponseEntity<>(organization, httpHeaders, HttpStatus.OK);
     }
 
 }
