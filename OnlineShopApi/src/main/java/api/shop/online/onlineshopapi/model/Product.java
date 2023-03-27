@@ -1,5 +1,6 @@
 package api.shop.online.onlineshopapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
 
@@ -14,8 +15,9 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "organization_id")
+    @JsonBackReference
     private Organization organization;
 
     @Column(name = "price")

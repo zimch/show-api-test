@@ -1,5 +1,7 @@
 package api.shop.online.onlineshopapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -22,10 +24,13 @@ public class Organization {
 
     @OneToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
-    @OneToMany(mappedBy = "organization")
+    @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY)
     @Column(name = "product")
+    @JsonManagedReference
+//    @JsonIgnore
     private Set<Product> products;
 
     public Organization() {

@@ -1,5 +1,7 @@
 package api.shop.online.onlineshopapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -31,7 +33,9 @@ public class User {
     @Column(name = "status")
     private Status status = Status.ACTIVE;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonManagedReference
+//    @JsonIgnore
 //    @JoinColumn(name = "purchase_id")
     private Set<Purchase> purchases;
 
@@ -39,7 +43,9 @@ public class User {
 //    @JoinColumn(name = "review_id")
 //    private Set<Review> reviews;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonManagedReference
+//    @JsonIgnore
     private Organization organization;
 
     public User() {
