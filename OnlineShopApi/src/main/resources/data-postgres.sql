@@ -1,0 +1,2 @@
+INSERT INTO users(login, email, password, balance, role, status) VALUES ("user", "user@user.ru", "user", 0, "USER", "ACTIVE");
+INSERT INTO users(login, email, password, balance, role, status) VALUES ("admin", "admin@admin.ru", "admin", 1000, "ADMIN", "ACTIVE");
