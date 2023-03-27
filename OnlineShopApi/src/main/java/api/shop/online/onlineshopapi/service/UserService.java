@@ -1,6 +1,7 @@
 package api.shop.online.onlineshopapi.service;
 
 import api.shop.online.onlineshopapi.model.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 

@@ -23,13 +23,13 @@ public class User {
     @Column(name = "balance")
     private Long balance;
 
-//    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private String role = Role.USER.name();
+    private Role role = Role.USER;
 
-//    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status = Status.ACTIVE.name();
+    private Status status = Status.ACTIVE;
 
     @OneToMany(mappedBy = "user")
 //    @JoinColumn(name = "purchase_id")
@@ -45,8 +45,8 @@ public class User {
     public User() {
     }
 
-    public User(String login, String email, String password, Long balance, String role,
-                String status) {
+    public User(String login, String email, String password, Long balance, Role role,
+                Status status) {
         this.login = login;
         this.email = email;
         this.password = password;
@@ -95,19 +95,19 @@ public class User {
         this.balance = balance;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
