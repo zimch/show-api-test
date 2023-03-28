@@ -18,13 +18,11 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserRestController {
 
     @Autowired
@@ -113,6 +111,13 @@ public class UserRestController {
         }
 
         return new ResponseEntity<>(product, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/purchases", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<Purchase>> getAllPurchases(Principal principal) {
+        User currentUser = userRepository.findByLogin(principal.getName()).orElseThrow();
+
+        return new ResponseEntity<>(currentUser.getPurchases(), HttpStatus.OK);
     }
 
 }

@@ -47,7 +47,6 @@ public class User {
 //    private Set<Review> reviews;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonManagedReference
 //    @JsonIgnore
     private Organization organization;
 

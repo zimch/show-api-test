@@ -1,5 +1,6 @@
 package api.shop.online.onlineshopapi.rest;
 
+import api.shop.online.onlineshopapi.model.Product;
 import api.shop.online.onlineshopapi.model.Status;
 import api.shop.online.onlineshopapi.model.User;
 import api.shop.online.onlineshopapi.repository.UserRepository;
@@ -100,7 +101,7 @@ public class AdminRestController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping(value = "/users/balance/{id}")
+    @PutMapping(value = "/users/balance/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> updateBalance(@PathVariable("id") Long id, @RequestBody User user) {
         User balanceUpdateUser = userRepository.findById(id).orElseThrow();
 
@@ -109,5 +110,10 @@ public class AdminRestController {
         userRepository.save(balanceUpdateUser);
 
         return new ResponseEntity<>(balanceUpdateUser, HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/edit/product/{prod_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Product> editProductInfo(@PathVariable("prod_id") Long prod_id, @RequestBody Product product) {
+        // TODO: bruh..
     }
 }

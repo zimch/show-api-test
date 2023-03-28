@@ -25,7 +25,6 @@ public class Organization {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    @JsonBackReference
     @JsonIgnore
     private User user;
 
