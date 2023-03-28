@@ -108,7 +108,7 @@ public class UserRestController {
 
             userRepository.save(currentUser);
             productRepository.save(product);
-            purchaseRepository.save(purchases.stream().toList().get(purchases.size()-1));
+            purchaseRepository.save(purchase);
             organizationRepository.save(organization);
         }
 

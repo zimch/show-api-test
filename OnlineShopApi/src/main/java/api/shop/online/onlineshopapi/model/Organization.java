@@ -1,5 +1,6 @@
 package api.shop.online.onlineshopapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -24,6 +25,7 @@ public class Organization {
 
     @OneToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     @JsonIgnore
     private User user;
 

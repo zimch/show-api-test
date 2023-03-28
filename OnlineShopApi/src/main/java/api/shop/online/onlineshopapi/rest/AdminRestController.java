@@ -2,6 +2,7 @@ package api.shop.online.onlineshopapi.rest;
 
 import api.shop.online.onlineshopapi.model.Status;
 import api.shop.online.onlineshopapi.model.User;
+import api.shop.online.onlineshopapi.repository.UserRepository;
 import api.shop.online.onlineshopapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +18,9 @@ import java.util.List;
 public class AdminRestController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    UserRepository userRepository;
 
 
     // breakpoints for working with users (extra functionality)
@@ -94,5 +98,16 @@ public class AdminRestController {
         this.userService.delete(id);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping(value = "/users/balance/{id}")
+    public ResponseEntity<User> updateBalance(@PathVariable("id") Long id, @RequestBody User user) {
+        User balanceUpdateUser = userRepository.findById(id).orElseThrow();
+
+        balanceUpdateUser.setBalance(user.getBalance());
+
+        userRepository.save(balanceUpdateUser);
+
+        return new ResponseEntity<>(balanceUpdateUser, HttpStatus.OK);
     }
 }
