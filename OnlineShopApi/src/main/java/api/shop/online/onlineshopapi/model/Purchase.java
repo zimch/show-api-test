@@ -1,7 +1,9 @@
 package api.shop.online.onlineshopapi.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.util.Date;
 
@@ -21,6 +23,8 @@ public class Purchase {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "purchase_date")
+    @CreatedDate
+    @JsonFormat(pattern="yyyy-MM-dd")
     Date date;
 
     public Purchase() {

@@ -21,7 +21,7 @@ public class Product {
     private Organization organization;
 
     @Column(name = "price")
-    private Double price;
+    private Long price;
 
     @Column(name = "quantity")
     private Long quantity;
@@ -36,7 +36,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String description, Double price, Long quantity) {
+    public Product(String description, Long price, Long quantity) {
         this.description = description;
         this.price = price;
         this.quantity = quantity;
@@ -67,11 +67,11 @@ public class Product {
         this.organization = organization;
     }
 
-    public Double getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
@@ -81,6 +81,10 @@ public class Product {
 
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
+    }
+
+    public void changeQuantity() {
+        this.quantity--;
     }
 
 //    public List<String> getKeywords() {

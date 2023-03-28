@@ -1,6 +1,5 @@
 package api.shop.online.onlineshopapi.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -38,6 +37,10 @@ public class User {
 //    @JsonIgnore
 //    @JoinColumn(name = "purchase_id")
     private Set<Purchase> purchases;
+
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    @JsonManagedReference
+//    private Set<PurchaseHistory> purshase;
 
 //    @OneToMany(mappedBy = "user")
 //    @JoinColumn(name = "review_id")
@@ -139,5 +142,9 @@ public class User {
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
+    }
+
+    public void changeBalance(long increment) {
+        this.balance += increment;
     }
 }
