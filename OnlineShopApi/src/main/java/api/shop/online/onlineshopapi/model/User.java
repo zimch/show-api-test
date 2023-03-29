@@ -1,5 +1,6 @@
 package api.shop.online.onlineshopapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -26,28 +27,21 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
+    @JsonIgnore
     private Role role = Role.USER;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
+    @JsonIgnore
     private Status status = Status.ACTIVE;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonManagedReference
-//    @JsonIgnore
-//    @JoinColumn(name = "purchase_id")
+    @JsonIgnore
     private Set<Purchase> purchases;
 
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-//    @JsonManagedReference
-//    private Set<PurchaseHistory> purshase;
-
-//    @OneToMany(mappedBy = "user")
-//    @JoinColumn(name = "review_id")
-//    private Set<Review> reviews;
-
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
-//    @JsonIgnore
+    @JsonIgnore
     private Organization organization;
 
     public User() {

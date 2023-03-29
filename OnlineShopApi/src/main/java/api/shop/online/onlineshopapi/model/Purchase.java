@@ -2,6 +2,7 @@ package api.shop.online.onlineshopapi.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -15,8 +16,13 @@ public class Purchase {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    @JsonBackReference
+    @JsonManagedReference
     private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    @JsonManagedReference
+    private Product product;
 
     @Column(name = "price")
     private Long price;
@@ -66,4 +72,13 @@ public class Purchase {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
 }

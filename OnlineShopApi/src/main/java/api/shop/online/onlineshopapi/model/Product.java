@@ -1,6 +1,8 @@
 package api.shop.online.onlineshopapi.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
 
@@ -12,6 +14,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "description")
     private String description;
 
@@ -20,27 +25,25 @@ public class Product {
     @JsonBackReference
     private Organization organization;
 
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @JsonBackReference
+//    @JsonIgnore
+    private List<Purchase> purchases;
+
     @Column(name = "price")
     private Long price;
 
     @Column(name = "quantity")
     private Long quantity;
 
-//    @Type(ListArrayType.class)
-//    @Column(
-//            name = "keywords",
-//            columnDefinition = "text[]"
-//    )
-//    private List<String> keywords;
-
     public Product() {
     }
 
-    public Product(String description, Long price, Long quantity) {
+    public Product(String name, String description, Long price, Long quantity) {
+        this.name = name;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
-//        this.keywords = keywords;
     }
 
     public Long getId() {
@@ -87,11 +90,24 @@ public class Product {
         this.quantity--;
     }
 
-//    public List<String> getKeywords() {
-//        return keywords;
-//    }
+    public String getName() {
+        return name;
+    }
 
-//    public void setKeywords(List<String> keywords) {
-//        this.keywords = keywords;
-//    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(List<Purchase> purchases) {
+        this.purchases = purchases;
+    }
+
+    public void addPurchase(Purchase purchase) {
+        this.purchases.add(purchase);
+    }
+
 }

@@ -101,8 +101,10 @@ public class UserRestController {
             Set<Purchase> purchases = currentUser.getPurchases();
             Purchase purchase = new Purchase(product.getPrice(), new Date());
             purchase.setUser(currentUser);
+            purchase.setProduct(product);
             purchases.add(purchase);
             currentUser.setPurchases(purchases);
+            product.addPurchase(purchase);
 
             userRepository.save(currentUser);
             productRepository.save(product);

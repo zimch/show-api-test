@@ -144,12 +144,12 @@ public class AdminRestController {
         return new ResponseEntity<>(productFromDB, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/users/purchases/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<Purchase>> getAllPurchases(@PathVariable("id") Long id, Principal principal) {
-        User findedUser = userRepository.findById(id).orElseThrow();
-
-        return new ResponseEntity<>(findedUser.getPurchases(), HttpStatus.OK);
-    }
+//    @GetMapping(value = "/users/purchases/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<Set<Purchase>> getAllPurchases(@PathVariable("id") Long id, Principal principal) {
+//        User findedUser = userRepository.findById(id).orElseThrow();
+//
+//        return new ResponseEntity<>(findedUser.getPurchases(), HttpStatus.OK);
+//    }
 
     @PutMapping(value = "/edit/organization/{org_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Organization> editOrganization(@PathVariable("org_id") Long org_id, @RequestBody Organization organization) {
