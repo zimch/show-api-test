@@ -1,0 +1,4 @@
+rootProject.name = 'test-micro'
+
+includeBuild 'eureka-server'
+includeBuild 'eureka-client'
