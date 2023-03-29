@@ -23,6 +23,9 @@ public class Organization {
     @Column(name = "logo")
     private byte[] logo;
 
+    @Column(name = "status")
+    private Status status;
+
     @OneToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
@@ -37,10 +40,11 @@ public class Organization {
     public Organization() {
     }
 
-    public Organization(String name, String description, byte[] logo) {
+    public Organization(String name, String description, byte[] logo, Status status) {
         this.name = name;
         this.description = description;
         this.logo = logo;
+        this.status = status;
     }
 
     public Long getId() {
@@ -89,5 +93,13 @@ public class Organization {
 
     public void setProducts(Set<Product> products) {
         this.products = products;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
