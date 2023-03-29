@@ -25,10 +25,10 @@ public class Product {
     @JsonBackReference
     private Organization organization;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonBackReference
-//    @JsonIgnore
-    private List<Purchase> purchases;
+//    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+////    @JsonManagedReference
+////    @JsonIgnore
+//    private List<Purchase> purchases;
 
     @Column(name = "price")
     private Long price;
@@ -98,16 +98,16 @@ public class Product {
         this.name = name;
     }
 
-    public List<Purchase> getPurchases() {
-        return purchases;
-    }
+//    public List<Purchase> getPurchases() {
+//        return purchases;
+//    }
 
-    public void setPurchases(List<Purchase> purchases) {
-        this.purchases = purchases;
-    }
-
-    public void addPurchase(Purchase purchase) {
-        this.purchases.add(purchase);
-    }
+//    public void setPurchases(List<Purchase> purchases) {
+//        this.purchases = purchases;
+//    }
+//
+//    public void addPurchase(Purchase purchase) {
+//        this.purchases.add(purchase);
+//    }
 
 }

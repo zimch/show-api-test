@@ -57,30 +57,17 @@ public class AdminRestController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/users/save", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> saveUser(@RequestBody User user) {
-        HttpHeaders httpHeaders = new HttpHeaders();
-
-        if (user == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        this.userService.save(user);
-
-        return new ResponseEntity<>(user, httpHeaders, HttpStatus.OK);
-    }
-
-//    @PutMapping(value = "/users/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody User user) {
+//    @PostMapping(value = "/users/save", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<User> saveUser(@RequestBody User user) {
 //        HttpHeaders httpHeaders = new HttpHeaders();
 //
-//        if (user == null ||!userService.existUserById(id)) {
+//        if (user == null) {
 //            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 //        }
 //
 //        this.userService.save(user);
 //
-//        return new ResponseEntity<>(user, HttpStatus.OK);
+//        return new ResponseEntity<>(user, httpHeaders, HttpStatus.OK);
 //    }
 
     @PutMapping(value = "/users/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -103,16 +90,16 @@ public class AdminRestController {
         return new ResponseEntity<>(userFromDB, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/users/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> deleteUser(@PathVariable("id") Long id) {
-        if (!userService.existUserById(id)) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        this.userService.delete(id);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+//    @DeleteMapping(value = "/users/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<User> deleteUser(@PathVariable("id") Long id) {
+//        if (!userService.existUserById(id)) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//
+//        this.userService.delete(id);
+//
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
 
     @PutMapping(value = "/users/balance/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> updateBalance(@PathVariable("id") Long id, @RequestBody User user) {
@@ -143,13 +130,6 @@ public class AdminRestController {
 
         return new ResponseEntity<>(productFromDB, HttpStatus.OK);
     }
-
-//    @GetMapping(value = "/users/purchases/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<Set<Purchase>> getAllPurchases(@PathVariable("id") Long id, Principal principal) {
-//        User findedUser = userRepository.findById(id).orElseThrow();
-//
-//        return new ResponseEntity<>(findedUser.getPurchases(), HttpStatus.OK);
-//    }
 
     @PutMapping(value = "/edit/organization/{org_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Organization> editOrganization(@PathVariable("org_id") Long org_id, @RequestBody Organization organization) {

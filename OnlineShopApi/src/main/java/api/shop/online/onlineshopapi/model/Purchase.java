@@ -16,13 +16,15 @@ public class Purchase {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    @JsonManagedReference
+//    @JsonManagedReference
+    @JsonBackReference
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id")
-    @JsonManagedReference
-    private Product product;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "product_id")
+////    @JsonManagedReference
+//    @JsonBackReference
+//    private Product product;
 
     @Column(name = "price")
     private Long price;
@@ -73,12 +75,12 @@ public class Purchase {
         this.date = date;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+//    public Product getProduct() {
+//        return product;
+//    }
+//
+//    public void setProduct(Product product) {
+//        this.product = product;
+//    }
 
 }
